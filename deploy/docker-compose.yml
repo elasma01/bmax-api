@@ -1,0 +1,16 @@
+services:
+  app:
+    image: ${APP_IMAGE:-bmax-api:latest}
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL:-https://api.openai.com}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o-mini}
+      OPENAI_TEMPERATURE: ${OPENAI_TEMPERATURE:-0.2}
+      PROXY_PUBLIC_MODEL_NAME: ${PROXY_PUBLIC_MODEL_NAME:-gpt-4o-mini}
+      SERVER_PORT: 8080
+    ports:
+      - "127.0.0.1:18083:8080"
